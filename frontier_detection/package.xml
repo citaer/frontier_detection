@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>frontier_detection</name>
+  <version>2.1.4</version>
+
+  <description>frontier_detection</description>
+
+  <author email="citaer123@gmail.com">Jiri Horner</author>
+  <maintainer email="citaer123@gmail.com">Jiri Horner</maintainer>
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>move_base_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>map_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>actionlib_msgs</depend>
+  <depend>tf</depend>
+  <depend>costmap_2d</depend>
+  <depend>actionlib</depend>
+
+  <test_depend>roslaunch</test_depend>
+</package>
