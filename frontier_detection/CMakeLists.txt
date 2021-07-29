@@ -62,6 +62,13 @@ add_executable(frontier_detection
 add_dependencies(frontier_detection ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(frontier_detection ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+
+add_executable(frontier_detection_using_seed
+  src/frontier_detection_using_seed.cpp
+)
+add_dependencies(frontier_detection_using_seed ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(frontier_detection_using_seed ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
 #############
 ## Install ##
 #############
