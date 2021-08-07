@@ -34,6 +34,7 @@ namespace frontier_detection
         private:
             void CostmapSubCallback_global(const nav_msgs::OccupancyGrid::ConstPtr& map)
             {
+                frontier_temp=closest_frontier_idx;
                 ros::Time timestamp = map->header.stamp;
                 global_costmap = *map;
                 GetRobotpose("/PandarQT",global_pose, timestamp);
@@ -45,12 +46,22 @@ namespace frontier_detection
                 a[2]=global_costmap.info.resolution*100000;
                 robot_index=(a[1]/a[2])*global_costmap.info.width+a[0]/a[2];
                 robot_position_pub_.publish(global_pose);
-                if(closest_frontier_idx&&global_costmap.data[closest_frontier_idx]<97)
+                if(closest_frontier_idx!=0&&global_costmap.data[closest_frontier_idx]<97&&frontier_count<5)
                     seed=closest_frontier_idx;
                 else
+                    {
+                    frontier_count=0;
                     seed=robot_index;
+                    }
                 find_closest_frontier(global_costmap,seed,closest_frontier_idx);
-                seed=closest_frontier_idx;
+                if(frontier_temp==closest_frontier_idx)
+                    frontier_count++;
+                else
+                    frontier_count=0;
+                // check_frontier(global_costmap,robot_index,closest_frontier_idx);
+                // seed=closest_frontier_idx;
+                // std::cout<<"frontier_temp==closest_frontier_idx:"<< (frontier_temp==closest_frontier_idx) <<endl;
+                cout<<"frontier_count:"<<frontier_count<<endl;
                 closest_frontier_point.header.frame_id = "/robot0/map";
                 closest_frontier_point.header.stamp = ros::Time::now();
                 closest_frontier_point.pose.orientation.w = 1;
@@ -61,6 +72,27 @@ namespace frontier_detection
             }
 
 
+    // void check_frontier(const nav_msgs::OccupancyGrid& occupancy_map,int start_idx,int &frontier_idx)
+    // {
+    //     int start_x,start_y,frontier_x,frontier_y;
+    //     int i_x,i_y,index;
+    //     start_x=start_idx/occupancy_map.info.width;
+    //     start_y=start_idx%occupancy_map.info.width;
+    //     frontier_x=frontier_idx/occupancy_map.info.width;
+    //     frontier_y=frontier_idx%occupancy_map.info.width;
+    //     int k=(frontier_y-start_y)/(frontier_x-start_x);
+    //     for(int i=0;i<abs(frontier_x-start_x);i++)
+    //     {
+    //         i_x=start_x+k*i;
+    //         i_y=start_y+k*i;
+    //         index=i_x+i_y*occupancy_map.info.width;
+    //         if(occupancy_map.data[index]>=97)
+    //         {
+    //             seed=robot_index;
+    //             find_closest_frontier(global_costmap,seed,closest_frontier_idx);
+    //         }
+    //     }
+    // }
 
     void find_closest_frontier(const nav_msgs::OccupancyGrid& occupancy_map,int start_idx,int &frontier_idx) 
     {
@@ -70,27 +102,30 @@ namespace frontier_detection
         int current;
         if(occupancy_map.data[start_idx]<97)
         {
-        id.push(start_idx);
-        while (id.size()) 
-        {
-            current = id.front();
-            id.pop();
-            for(int i=0;i<4;i++)
+            id.push(start_idx);
+            while (id.size()) 
             {
-                int neighbor_id=current+a[i];
-                if((occupancy_map.data[neighbor_id]<97)&&!(visited[neighbor_id]))
+                current = id.front();
+                id.pop();
+                for(int i=0;i<4;i++)
                 {
-                    if(occupancy_map.data[current]==-1)
-                    {
-                        frontier_idx=current;
-                        id=queue<int>();
-                        break;
-                    }
-                        id.push(neighbor_id);
-                        ++visited[neighbor_id];
+                    int neighbor_id=current+a[i];
+                    if(neighbor_id>=0&&neighbor_id<occupancy_map.info.width*occupancy_map.info.height)
+                        {
+                                if((occupancy_map.data[neighbor_id]<97)&&!(visited[neighbor_id]))
+                                {
+                                    if(occupancy_map.data[current]==-1)
+                                    {
+                                        frontier_idx=current;
+                                        id=queue<int>();
+                                        break;
+                                    }
+                                        id.push(neighbor_id);
+                                        ++visited[neighbor_id];
+                                }
+                        }
                 }
             }
-        }
         }
     }
             
@@ -123,7 +158,9 @@ namespace frontier_detection
             tf::TransformListener tf_listener_;
             int robot_index;
             int seed;
-            int closest_frontier_idx;
+            int frontier_temp=0;
+            int frontier_count=0;
+            int closest_frontier_idx=0;
             int resolution=0.2;
 
             // protected:

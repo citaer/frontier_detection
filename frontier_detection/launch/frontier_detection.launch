@@ -1,6 +1,7 @@
 <launch>
-  <arg name="/use_sim_time" value="true"/>
+  <arg name="/use_sim_time" value="false"/>
   <node name="naive_frontier_detection" pkg="frontier_detection" type="frontier_detection" output="screen"/>
   <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find frontier_detection)/rviz/elevation_map_visualization.rviz" /> -->
+  <node name="tf_transformer" pkg="tf" type="static_transform_publisher" args="0 0 0 -1.57 0 0 PandarQT Pandar 100"/>
 </launch>
 
