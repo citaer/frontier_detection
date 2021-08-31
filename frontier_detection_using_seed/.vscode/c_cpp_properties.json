@@ -1,0 +1,41 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/cita/1test/frontier_detection_ws/devel/include/**",
+        "/home/cita/catkin_5G/devel/include/**",
+        "/home/cita/raystar_ws/devel/include/**",
+        "/home/cita/catkin_ws3/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/cita/raystar_ws/src/raystar_opensource/base_local_planner/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/fbet/octomap/dynamicEDT3D/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/frontier_exploration_ros_wiki/exploration_server/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/fbet/fbet/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/frontier_detection/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/frontier_exploration_ros_wiki/frontier_exploration/include/**",
+        "/home/cita/catkin_5G/src/planning/global_planner/include/**",
+        "/home/cita/catkin_5G/src/zdk_motion_planning/husky/husky_base/include/**",
+        "/home/cita/catkin_ws3/src/LeGO-LOAM/LeGO-LOAM/include/**",
+        "/home/cita/catkin_5G/src/zdk_motion_planning/lp_node_5g/include/**",
+        "/home/cita/raystar_ws/src/raystar_opensource/move_base/include/**",
+        "/home/cita/raystar_ws/src/raystar_opensource/multi_goal_dijkstra/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/fbet/octomap/octomap/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/fbet/octomap/octovis/include/**",
+        "/home/cita/1test/frontier_detection_ws/src/frontier_exploration_ros_wiki/polygon_layer/include/**",
+        "/home/cita/raystar_ws/src/raystar_opensource/raystar/include/**",
+        "/home/cita/catkin_5G/src/zdk_motion_planning/simple_layers/include/**",
+        "/home/cita/catkin_5G/src/turtlebot/velodyne/velodyne_driver/include/**",
+        "/home/cita/catkin_5G/src/turtlebot/velodyne/velodyne_laserscan/include/**",
+        "/home/cita/catkin_5G/src/turtlebot/velodyne/velodyne_pointcloud/include/**",
+        "/home/cita/catkin_ws3/src/autonomous_exploration_development_environment/src/waypoint_rviz_plugin/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

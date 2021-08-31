@@ -1,0 +1,10 @@
+<launch>
+  <arg name="/use_sim_time" value="false"/>
+  <!-- <node name="naive_frontier_detection" pkg="frontier_detection" type="frontier_detection_using_seed" output="screen"/> -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find frontier_detection_using_seed)/rviz/map.rviz" />
+  <!--<node name="tf_transformer" pkg="tf" type="static_transform_publisher" args="0 0 0 -1.57 0 0 PandarQT Pandar 100"/>-->
+  <node name="map_pub" pkg="map_server" type="map_server" output="screen" args="$(find frontier_detection)/map/map.yaml"/>
+  <node name="frontier_detection_test" pkg="frontier_detection" type="sampling_based_frontier_detection" output="screen" />
+  
+</launch>
+

@@ -1,0 +1,9 @@
+<launch>
+  <arg name="/use_sim_time" value="false"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find frontier_detection)/rviz/map.rviz" />
+  <!-- <node name="map_pub" pkg="frontier_detection" type="test_map_pub" output="screen" /> -->
+  <node name="map_pub" pkg="map_server" type="map_server" output="screen" args="$(find frontier_detection)/map/map.yaml"/>
+  
+  
+</launch>
+
